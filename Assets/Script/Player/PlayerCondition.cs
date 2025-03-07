@@ -1,9 +1,14 @@
 using System;
 using UnityEngine;
 
+public interface IDamagable
+{
+    void TakePhysicalDamage(int damageAmount);
+}
+
 // UI를 참조할 수 있는 PlayerCondition
 // 외부에서 능력치 변경 기능은 이곳을 통해서 호출. 내부적으로 UI 업데이트 수행.
-public class PlayerCondition : MonoBehaviour
+public class PlayerCondition : MonoBehaviour, IDamagable
 {
     public UICondition uiCondition;
 
@@ -30,5 +35,11 @@ public class PlayerCondition : MonoBehaviour
     public void Die()
     {
         Debug.Log("플레이어가 죽었다.");
+    }
+
+    public void TakePhysicalDamage(int damageAmount)
+    {
+        health.Subtract(damageAmount);
+        onTakeDamage?.Invoke();
     }
 }
