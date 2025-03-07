@@ -20,6 +20,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     private void Update()
     {
         stamina.Add(stamina.passiveValue * Time.deltaTime);
+        health.Add(health.passiveValue * Time.deltaTime);
 
         if (health.curValue < 0f)
         {
@@ -41,5 +42,15 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     {
         health.Subtract(damageAmount);
         onTakeDamage?.Invoke();
+    }
+
+    public bool UseStamina(float amount)
+    {
+        if (stamina.curValue - amount < 0)
+        {
+            return false;
+        }
+        stamina.Subtract(amount);
+        return true;
     }
 }
