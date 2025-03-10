@@ -12,6 +12,10 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayerMask;
     public float useStamina;
 
+    [Header("Ladder Climbing")]
+    public float climbSpeed = 3f; // 사다리 등반 속도 추가
+    private bool isClimbing = false;
+
     [Header("Look")]
     public Transform cameraContainer;
     public float minXLook;
@@ -38,7 +42,31 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isClimbing) // 사다리 상태일 때는 Climb() 실행
+            Climb();
+
         Move();
+    }
+
+    public void StartClimbing()
+    {
+        isClimbing = true;
+        rigidbody.useGravity = false; // 중력 제거
+        rigidbody.velocity = Vector3.zero;
+    }
+
+    //  사다리에서 벗어나면 원래 상태로 복귀
+    public void StopClimbing()
+    {
+        isClimbing = false;
+        rigidbody.useGravity = true; // 중력 복구
+    }
+
+    //  사다리 등반 로직 (W/S 키를 이용한 위아래 이동)
+    private void Climb()
+    {
+        float verticalMove = curMovementInput.y * climbSpeed;
+        rigidbody.velocity = new Vector3(0, verticalMove, 0); //  X, Z 이동 없이 Y축으로만 움직임
     }
 
     private void LateUpdate()
