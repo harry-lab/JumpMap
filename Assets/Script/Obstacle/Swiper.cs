@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Swiper : MonoBehaviour
 {
-    public float rotationSpeed = 50f; // 회전 속도
-    public float floatSpeed = 1f; // 위아래 움직이는 속도
-    public float floatHeight = 0.1f; // 위아래 움직이는 높이
+    public float rotationSpeed = 70f; // 회전 속도
 
     private Vector3 startPosition;
     // Start is called before the first frame update
