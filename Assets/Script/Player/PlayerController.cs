@@ -125,4 +125,18 @@ public class PlayerController : MonoBehaviour
         rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
         rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
     }
+
+    public IEnumerator SpeedBoost(float amount, float duration)
+    {
+        moveSpeed += amount; // 이동 속도 증가
+        yield return new WaitForSeconds(duration); // 일정 시간 대기
+        moveSpeed -= amount; // 원래 속도로 복구
+    }
+
+    public IEnumerator JumpBoost(float amount, float duration)
+    {
+        jumpPower += amount; // 점프력 증가
+        yield return new WaitForSeconds(duration); // 20초 대기
+        jumpPower -= amount; // 원래 점프력으로 복구
+    }
 }

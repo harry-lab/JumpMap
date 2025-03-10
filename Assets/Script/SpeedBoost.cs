@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class HeartItem : MonoBehaviour
+public class StarPickup : MonoBehaviour
 {
-    public float healAmount = 20f; // 회복량
+    public float speedBoost = 5f; // 증가할 속도 값
+    public float boostDuration = 5f; // 지속 시간
     public float rotationSpeed = 50f; // 회전 속도
     public float floatSpeed = 1f; // 위아래 움직이는 속도
-    public float floatHeight = 0.1f; // 위아래 움직이는 높이
+    public float floatHeight = 0.1f;
 
     private Vector3 startPosition;
 
@@ -16,7 +17,7 @@ public class HeartItem : MonoBehaviour
 
     private void Update()
     {
-        // 하트 회전
+        // 회전
         transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
 
         // 위아래 움직이기
@@ -28,11 +29,12 @@ public class HeartItem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerCondition playerCondition = other.GetComponent<PlayerCondition>();
-            if (playerCondition != null)
+            PlayerController playerController = other.GetComponent<PlayerController>();
+
+            if (playerController != null)
             {
-                playerCondition.Heal(healAmount);
-                Destroy(gameObject); // 아이템 사용 후 삭제
+                playerController.StartCoroutine(playerController.SpeedBoost(speedBoost, boostDuration));
+                Destroy(gameObject); // 별 오브젝트 제거
             }
         }
     }
