@@ -12,6 +12,7 @@ public interface IDamagable
 public class PlayerCondition : MonoBehaviour, IDamagable
 {
     public UICondition uiCondition;
+    public GameOverUI gameOverUI;
 
     Condition health { get { return uiCondition.health; } }
     Condition stamina { get { return uiCondition.stamina; } }
@@ -28,7 +29,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
 
         if (health.curValue < 0f)
         {
-            Die();
+            Die();       
         }
     }
 
@@ -40,6 +41,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     public void Die()
     {
         Debug.Log("플레이어가 죽었다.");
+        gameOverUI.ShowGameOver();
     }
 
     public void TakePhysicalDamage(int damageAmount)
