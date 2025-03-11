@@ -799,7 +799,7 @@ GameObject:
   - component: {fileID: 414458546}
   - component: {fileID: 414458545}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: ConditionUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6342,7 +6342,7 @@ GameObject:
   - component: {fileID: 1935956669}
   - component: {fileID: 1935956673}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: GameOverUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
